@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %><%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -21,8 +22,15 @@
          <div class="collapse navbar-collapse navHeaderCollapse">
            <ul class="nav navbar-nav navbar-right">
              <li class="active"><a href="#">Główna</a></li>
-             <li><a href="#">Dodaj</a></li>
-             <li><a href="#">Zaloguj się</a></li>
+             <li><a href="${pageContext.request.contextPath}/add">Dodaj</a></li>
+             <c:choose>
+             	<c:when test="${not empty sessionScope.user}">
+             		<li><a href="${pageContext.request.contextPath}/logout">Wyloguj się</a></li>
+             	</c:when>
+             	<c:otherwise>
+             		<li><a href="${pageContext.request.contextPath}/login">Zaloguj się</a></li>
+             	</c:otherwise>
+             </c:choose>
            </ul>
          </div>
          

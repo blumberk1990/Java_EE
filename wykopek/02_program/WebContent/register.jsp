@@ -33,7 +33,7 @@
     
 	 <div class="container">
 		<div class="col-sm-6 col-md-4 col-md-offset-4">
-	      <form class="form-signin" method="post" action="#">
+	      <form class="form-signin" method="post" action="register">
 	        <h2 class="form-signin-heading">Zarejestruj się</h2>
 	        <label for="inputEmail" class="sr-only">Email adres</label>
 	        <input name="inputEmail" type="email" class="form-control" placeholder="Email" required autofocus />

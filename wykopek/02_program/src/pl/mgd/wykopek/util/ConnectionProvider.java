@@ -17,7 +17,7 @@ public class ConnectionProvider {
 		return getDsInstance().getConnection();
 	}
 	
-	private static DataSource getDsInstance() {
+	public static DataSource getDsInstance() {
 		if(dataSource == null) {
 			synchronized (ConnectionProvider.class) {
 				if (dataSource == null) {
