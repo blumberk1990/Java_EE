@@ -45,7 +45,6 @@ public class DiscoveryAddController extends HttpServlet {
 		String description = request.getParameter("inputDescription");
 		String url = request.getParameter("inputUrl");
 		User aauthenticatedUser = (User) request.getSession().getAttribute("user");
-		System.out.println("request.getUserPrincipal() " + request.getUserPrincipal().getName());
 		if(request.getUserPrincipal() != null) {
 			DiscoveryService discoveryService = new DiscoveryService();
 			discoveryService.addDiscovery(name, description, url, aauthenticatedUser);
