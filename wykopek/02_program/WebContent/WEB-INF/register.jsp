@@ -24,7 +24,7 @@
 	        	<label for="inputPassword" class="sr-only">Hasło</label>
 	        	<input name="inputPassword" type="password" class="form-control" placeholder="Hasło" required>
 	        	<button class="btn btn-lg btn-primary btn-block" type="submit">Zarejestruj się</button>
-	        	<a href="login.jsp">Zaloguj</a>
+	        	<a href="${pageContext.request.contextPath}/login">Zaloguj</a>
 	      	</form>
 		</div>
     </div> <!-- /container -->

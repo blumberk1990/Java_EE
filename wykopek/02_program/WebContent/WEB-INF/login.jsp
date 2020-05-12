@@ -27,7 +27,7 @@
 	          		</label>
 	        	</div>
 	        	<button class="btn btn-lg btn-primary btn-block" type="submit">Zaloguj</button>
-	        	<a href="register.jsp">Zarejestruj</a>
+	        	<a href="${pageContext.request.contextPath}/register">Zarejestruj</a>
 	      	</form>
 		</div>
     </div> <!-- /container -->
