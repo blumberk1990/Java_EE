@@ -25,8 +25,15 @@ public class DiscoveryDAOImpl implements DiscoveryDAO {
 	
 	private static final String READ_ALL_DISCOVERIES = 
 			"SELECT user.user_id, username, email, is_active, password, discovery_id, name, description, url, date, up_vote, down_vote "
-	  + "FROM discovery LEFT JOIN user ON discovery.user_id=user.user_id;";
+					+ "FROM discovery LEFT JOIN user ON discovery.user_id=user.user_id;";
 
+	private static final String READ_DISCOVERY = 
+			"SELECT user.user_id, username, email, is_active, password, discovery_id, name, description, url, date, up_vote, down_vote "
+					+ "FROM discovery LEFT JOIN user ON discovery.user_id=user.user_id WHERE discovery_id=:discovery_id;";
+	
+	private static final String UPDATE_DISCOVERY =
+			"UPDATE discovery SET name=:name, description=:description, url=:url, user_id=:user_id, date=:date, up_vote=:up_vote, down_vote=:down_vote "
+					+ "WHERE discovery_id=:discovery_id;";
 	
 	
 	private NamedParameterJdbcTemplate namedTemplate;
@@ -57,14 +64,30 @@ public class DiscoveryDAOImpl implements DiscoveryDAO {
 
 	@Override
 	public Discovery read(Long primaryKey) {
-		// TODO Auto-generated method stub
-		return null;
+		SqlParameterSource paramSource = new MapSqlParameterSource("discovery_id", primaryKey);
+		Discovery resultDiscovery = namedTemplate.queryForObject(READ_DISCOVERY, paramSource, new DiscoveryRowMapper());
+		return resultDiscovery;
 	}
 
 	@Override
-	public boolean update(Discovery updateObject) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean update(Discovery discovery) {
+		Discovery copyDiscovery = new Discovery(discovery);
+		boolean result = false;
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("discovery_id", copyDiscovery.getId());
+		paramMap.put("name", discovery.getName());
+ 		paramMap.put("description", discovery.getDescription());
+ 		paramMap.put("url", discovery.getUrl());
+ 		paramMap.put("user_id", discovery.getUser().getId());
+ 		paramMap.put("date", discovery.getTimestamp());
+ 		paramMap.put("up_vote", discovery.getUpVote());
+ 		paramMap.put("down_vote", discovery.getDownVote());
+		SqlParameterSource paramSource = new MapSqlParameterSource(paramMap);
+		int affectedRows = namedTemplate.update(UPDATE_DISCOVERY, paramSource);
+		if(affectedRows > 0) {
+			result = true;
+		}	
+		return result;
 	}
 
 	@Override
