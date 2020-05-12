@@ -30,6 +30,20 @@ public class DiscoveryService {
 		return discovery;
 	}
 	
+	public Discovery getDiscoveryById(long dicoveryId) {
+		DAOFactory factory = DAOFactory.getDAOFactory();
+		DiscoveryDAO discoveryDAO = factory.getDiscoveryDAO();
+		Discovery discovery = discoveryDAO.read(dicoveryId);
+		return discovery;
+	}
+	
+	public boolean updateDiscovery(Discovery discovery) {
+		DAOFactory factory = DAOFactory.getDAOFactory();
+		DiscoveryDAO discoveryDAO = factory.getDiscoveryDAO();
+		boolean result = discoveryDAO.update(discovery);
+		return result;
+	}
+	
 	public List<Discovery> getAllDiscoveries() {
 		return getAllDiscoveries(null);
 	}
